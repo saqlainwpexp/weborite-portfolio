@@ -3,10 +3,6 @@ import { useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import StatBox from "./StatBox";
 import SocialButton from "./SocialButton";
-import ServicesSection from "./ServicesSection";
-import PortfolioSection from "./PortfolioSection";
-import AboutSection from "./AboutSection";
-import ContactSection from "./ContactSection";
 
 const HeroSection = () => {
   const controls = useAnimation();
@@ -231,11 +227,6 @@ const HeroSection = () => {
           </motion.main>
         </div>
       </div>
-      
-      <ServicesSection />
-      <PortfolioSection />
-      <AboutSection />
-      <ContactSection />
     </div>
   );
 };
