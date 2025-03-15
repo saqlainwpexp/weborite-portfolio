@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSI5IiBzdHJva2U9IiMwMGZmNGMiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg=="), auto;
+  }
+
+  .graffiti-bg {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmFmZml0aSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PHRleHQgeD0iMTAiIHk9IjUwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIwIiBmaWxsPSJyZ2JhKDAsIDI1NSwgODAsIDAuMDMpIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTUpIj5TVFJJT0U8L3RleHQ+PHRleHQgeD0iMjAwIiB5PSIyMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMDAiIGZpbGw9InJnYmEoMCwgMjU1LCA4MCwgMC4wMikiIHRyYW5zZm9ybT0icm90YXRlKDEwKSI+QVBFIEZPT0xTPC90ZXh0Pjx0ZXh0IHg9IjQwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTUwIiBmaWxsPSJyZ2JhKDAsIDI1NSwgODAsIDAuMDIpIiB0cmFuc2Zvcm09InJvdGF0ZSgtNSkiPkFQRSBUT0dFVEhFUjwvdGV4dD48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZmZpdGkpIi8+PC9zdmc+');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .gradient-overlay {
+    background: linear-gradient(180deg, rgba(12, 14, 12, 0.9) 0%, rgba(12, 14, 12, 0.85) 100%);
+  }
+
+  .stat-box {
+    background: linear-gradient(135deg, rgba(18, 20, 18, 0.5) 0%, rgba(24, 26, 24, 0.8) 100%);
+    border: 1px solid rgba(0, 255, 76, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .stat-box:hover {
+    background: linear-gradient(135deg, rgba(18, 20, 18, 0.7) 0%, rgba(24, 26, 24, 1) 100%);
+    border: 1px solid rgba(0, 255, 76, 0.3);
+    transform: translateY(-5px);
+  }
+
+  .social-icon {
+    transition: all 0.2s ease;
+  }
+
+  .social-icon:hover {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 76, 0.7));
+    transform: scale(1.1);
+  }
+
+  .logo-hover {
+    transition: filter 0.3s ease;
+  }
+
+  .logo-hover:hover {
+    filter: drop-shadow(0 0 5px rgba(0, 255, 76, 0.7));
+  }
+}
