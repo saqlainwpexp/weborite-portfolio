@@ -4,7 +4,16 @@ import ProjectDialog from "./ProjectDialog";
 
 const PortfolioSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string;
+    overview: string;
+    stats: {
+      raised: string;
+      growth: string;
+    };
+    image: string;
+    websiteUrl: string;
+  } | null>(null);
   const containerRef = useRef(null);
 
   const categories = [

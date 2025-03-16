@@ -28,22 +28,31 @@ const ProjectDialog = ({ isOpen, onClose, project }: ProjectDialogProps) => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
             <div>
-              <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">{project.overview}</p>
-              
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center text-[#00ff4c]">
-                  <span className="font-semibold mr-2">{project.stats.raised}</span>
-                  <span className="text-sm">Raised in seed funding</span>
+              <div className="mb-6">
+                <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
+                <p className="text-sm text-gray-400">Digital ID Verification Platform</p>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                <div>
+                  <div className="text-xl font-semibold text-[#00ff4c]">{project.stats.raised}</div>
+                  <div className="text-sm text-gray-400">Raised in seed funding</div>
                 </div>
-                <div className="flex items-center text-[#00ff4c]">
-                  <span className="font-semibold mr-2">{project.stats.growth}</span>
-                  <span className="text-sm">growth in brand leads</span>
+                <div>
+                  <div className="text-xl font-semibold text-[#00ff4c]">{project.stats.growth}</div>
+                  <div className="text-sm text-gray-400">growth in brand leads</div>
                 </div>
               </div>
-              
+
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold mb-2">Overview</h4>
+                <p className="text-gray-400 text-sm">{project.overview}</p>
+              </div>
+
               <motion.a
                 href={project.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-black rounded-full text-white hover:bg-[#00ff4c]/10 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
