@@ -10,6 +10,11 @@ import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import CtaSection from "@/components/CtaSection";
 import CursorEffect from "@/components/CursorEffect";
+import Navbar from "@/components/Navbar";
+import ServicesPage from "@/pages/Services";
+import PortfolioPage from "@/pages/Portfolio";
+import AboutPage from "@/pages/About";
+import ContactPage from "@/pages/Contact";
 
 function HomePage() {
   return (
