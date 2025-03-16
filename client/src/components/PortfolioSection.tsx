@@ -67,10 +67,10 @@ const PortfolioSection = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          className="absolute top-20 left-[5%] w-80 h-80 rounded-full bg-gradient-to-r from-[#00ff4c]/5 to-transparent blur-3xl"
+          className="absolute top-20 left-[5%] w-80 h-80 rounded-full bg-gradient-to-r from-[#00ff4c]/3 to-transparent blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.1, 0.2, 0.1],
+            opacity: [0.07, 0.12, 0.07],
             rotate: [0, 90, 180, 270, 360],
           }}
           transition={{ 
@@ -184,9 +184,9 @@ const PortfolioSection = () => {
                 
                 {/* Overlay */}
                 <motion.div 
-                  className="absolute inset-0 bg-gradient-to-t from-[#0c0e0c] to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90"
-                  initial={{ opacity: 0.7 }}
-                  whileHover={{ opacity: 0.9 }}
+                  className="absolute inset-0 bg-gradient-to-t from-[#0c0e0c] to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-70"
+                  initial={{ opacity: 0.5 }}
+                  whileHover={{ opacity: 0.7 }}
                 />
                 
                 {/* Border Animation */}
