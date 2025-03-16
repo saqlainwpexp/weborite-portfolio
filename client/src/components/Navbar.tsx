@@ -9,6 +9,7 @@ export const Navbar = () => {
     { name: "Services", href: "/services" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" }
   ];
 
@@ -53,7 +54,7 @@ export const Navbar = () => {
           </motion.div>
         </Link>
       </div>
-      
+
       {/* Navigation */}
       <nav className="hidden md:flex items-center space-x-8">
         {navItems.map((item, i) => (
@@ -72,7 +73,7 @@ export const Navbar = () => {
           </motion.div>
         ))}
       </nav>
-      
+
       {/* Contact Button */}
       <motion.button 
         className="bg-[#181a18] hover:bg-[#00ff4c] hover:text-[#0c0e0c] transition-colors duration-300 text-white font-medium py-2 px-4 rounded-full text-sm flex items-center"
@@ -87,7 +88,7 @@ export const Navbar = () => {
         </svg>
         Get a Quote
       </motion.button>
-      
+
       {/* Mobile menu button - only show on small screens */}
       <div className="md:hidden">
         <motion.button 
@@ -110,7 +111,7 @@ export const Navbar = () => {
           </svg>
         </motion.button>
       </div>
-      
+
       {/* Mobile menu - show when toggled */}
       {isOpen && (
         <motion.div 

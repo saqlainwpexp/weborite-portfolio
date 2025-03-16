@@ -40,6 +40,11 @@ const BlogPage = () => {
             <p className="text-gray-400 max-w-2xl mx-auto">
               Insights, updates, and expert knowledge from our team
             </p>
+            <Link href="/blog/create">
+              <a className="inline-block mt-4 px-6 py-2 bg-[#00ff4c] text-black rounded hover:bg-[#00cc3d] transition-colors">
+                Write New Blog
+              </a>
+            </Link>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
