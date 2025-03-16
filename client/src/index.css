@@ -9,7 +9,23 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSI5IiBzdHJva2U9IiMwMGZmNGMiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg=="), auto;
+    cursor: none; /* Hide default cursor */
+  }
+  
+  /* Custom cursor styles */
+  .cursor-dot {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+  
+  /* Prevent text selection when using custom cursor */
+  ::selection {
+    background-color: rgba(0, 255, 76, 0.3);
+    color: #fff;
   }
 
   .graffiti-bg {

@@ -9,6 +9,7 @@ import PortfolioSection from "@/components/PortfolioSection";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import CtaSection from "@/components/CtaSection";
+import CursorEffect from "@/components/CursorEffect";
 
 function HomePage() {
   return (
@@ -38,6 +39,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router />
+      <CursorEffect />
       <Toaster />
     </QueryClientProvider>
   );
