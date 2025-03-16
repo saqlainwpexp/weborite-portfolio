@@ -258,8 +258,8 @@ const PortfolioSection = () => {
           viewport={{ once: false }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <motion.a 
-            href="/portfolio"
+          <motion.button 
+            onClick={() => window.location.href = '/portfolio'}
             className="bg-[#181a18] border border-[#2c2e2c] text-white px-8 py-3 rounded-full inline-flex items-center font-medium hover:bg-[#00ff4c]/10 hover:border-[#00ff4c]/30 transition-all duration-300"
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0, 255, 76, 0.2)" }}
             whileTap={{ scale: 0.95 }}
@@ -268,7 +268,7 @@ const PortfolioSection = () => {
             <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
     </section>
