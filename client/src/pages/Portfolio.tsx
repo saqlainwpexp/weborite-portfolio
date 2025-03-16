@@ -21,7 +21,7 @@ const PortfolioPage = () => {
       </div>
       <PortfolioSection />
       <CtaSection />
-      {/* Footer goes here */}
+      <SimpleFooter />
     </div>
   );
 };

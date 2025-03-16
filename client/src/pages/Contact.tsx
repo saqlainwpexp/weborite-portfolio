@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
+import SimpleFooter from "@/components/SimpleFooter";
 
 const ContactPage = () => {
   return (
@@ -18,7 +19,7 @@ const ContactPage = () => {
         </div>
       </div>
       <ContactSection />
-      {/* Footer goes here */}
+      <SimpleFooter />
     </div>
   );
 };

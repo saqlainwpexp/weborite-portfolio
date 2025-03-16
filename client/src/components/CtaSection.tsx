@@ -150,7 +150,7 @@ const CtaSection = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
           >
             <motion.a 
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center bg-[#0c0e0c] text-white rounded-full px-8 py-3 font-medium shadow-lg hover:bg-[#1a1e1a] transition-all duration-300"
               whileHover={{ 
                 scale: 1.05,

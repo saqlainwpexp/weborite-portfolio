@@ -27,6 +27,8 @@ const SocialButton = ({ platform, href }: SocialButtonProps) => {
   return (
     <motion.a 
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="social-icon p-2 bg-[#181a18] rounded-full"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}

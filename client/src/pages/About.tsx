@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
 import CtaSection from "@/components/CtaSection";
+import SimpleFooter from "@/components/SimpleFooter";
 
 const AboutPage = () => {
   return (
@@ -20,7 +21,7 @@ const AboutPage = () => {
       </div>
       <AboutSection />
       <CtaSection />
-      {/* Footer goes here */}
+      <SimpleFooter />
     </div>
   );
 };

@@ -162,9 +162,9 @@ const HeroSection = () => {
               className="flex items-center space-x-4 mb-12"
               variants={fadeInUp}
             >
-              <SocialButton platform="telegram" href="#" />
-              <SocialButton platform="twitter" href="#" />
-              <SocialButton platform="discord" href="#" />
+              <SocialButton platform="telegram" href="https://telegram.org" />
+              <SocialButton platform="twitter" href="https://twitter.com" />
+              <SocialButton platform="discord" href="https://discord.com" />
             </motion.div>
             
             {/* Statistics */}
