@@ -1,9 +1,8 @@
-
 import Navbar from "@/components/Navbar";
 import SimpleFooter from "@/components/SimpleFooter";
 import { motion } from "framer-motion";
 
-import { Link } from "wouter";
+import { Link } from "wouter"; //Added Link import as per changes
 
 const BlogPage = () => {
   const blogPosts = [
@@ -46,7 +45,7 @@ const BlogPage = () => {
               Write New Blog
             </Link>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post, index) => (
               <motion.div
