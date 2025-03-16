@@ -18,7 +18,6 @@ import AboutPage from "@/pages/About";
 import ContactPage from "@/pages/Contact";
 import BlogPage from "@/pages/Blog";
 import CreateBlog from "@/pages/CreateBlog";
-import CreateBlog from "@/pages/CreateBlog";
 
 function HomePage() {
   return (
