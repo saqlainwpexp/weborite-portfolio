@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 
 const PortfolioSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedProject, setSelectedProject] = useState(null);
   const containerRef = useRef(null);
   
   const categories = [
@@ -231,8 +232,8 @@ const PortfolioSection = () => {
                   <motion.div
                     className="transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
                   >
-                    <motion.a 
-                      href={`/portfolio/${project.id}`}
+                    <motion.button 
+                      onClick={() => setSelectedProject(project)}
                       className="text-[#00ff4c] text-sm font-medium flex items-center"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
@@ -270,6 +271,26 @@ const PortfolioSection = () => {
           </motion.a>
         </motion.div>
       </div>
+    </section>
+  );
+};
+
+{selectedProject && (
+        <ProjectDialog
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+          project={{
+            title: selectedProject.title,
+            overview: selectedProject.description || "Digital ID Verification Platform",
+            stats: {
+              raised: "2M+",
+              growth: "72%"
+            },
+            image: selectedProject.image,
+            websiteUrl: selectedProject.url || "#"
+          }}
+        />
+      )}
     </section>
   );
 };
