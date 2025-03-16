@@ -59,6 +59,14 @@
     transform: scale(1.1);
   }
 
+  .scroll-down-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+  }
+
   .logo-hover {
     transition: filter 0.3s ease;
   }
