@@ -2,6 +2,17 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import ProjectDialog from "./ProjectDialog";
 
+interface Project {
+  title: string;
+  overview: string;
+  stats: {
+    raised: string;
+    growth: string;
+  };
+  image: string;
+  websiteUrl: string;
+}
+
 const PortfolioSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProject, setSelectedProject] = useState<{
@@ -259,6 +270,13 @@ const PortfolioSection = () => {
             </motion.div>
           ))}
         </motion.div>
+        {selectedProject && (
+          <ProjectDialog
+            isOpen={!!selectedProject}
+            onClose={() => setSelectedProject(null)}
+            project={selectedProject}
+          />
+        )}
 
         {/* More Projects Button */}
         <motion.div
