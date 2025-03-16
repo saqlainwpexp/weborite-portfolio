@@ -11,6 +11,7 @@ import ContactSection from "@/components/ContactSection";
 import CtaSection from "@/components/CtaSection";
 import CursorEffect from "@/components/CursorEffect";
 import Navbar from "@/components/Navbar";
+import SimpleFooter from "@/components/SimpleFooter";
 import ServicesPage from "@/pages/Services";
 import PortfolioPage from "@/pages/Portfolio";
 import AboutPage from "@/pages/About";
@@ -26,6 +27,7 @@ function HomePage() {
       <CtaSection />
       <AboutSection />
       <ContactSection />
+      <SimpleFooter />
     </div>
   );
 }

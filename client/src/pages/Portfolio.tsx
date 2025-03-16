@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import PortfolioSection from "@/components/PortfolioSection";
 import CtaSection from "@/components/CtaSection";
+import SimpleFooter from "@/components/SimpleFooter";
 
 const PortfolioPage = () => {
   return (

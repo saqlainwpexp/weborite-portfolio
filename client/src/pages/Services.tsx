@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import ServicesSection from "@/components/ServicesSection";
 import CtaSection from "@/components/CtaSection";
+import SimpleFooter from "@/components/SimpleFooter";
 
 const ServicesPage = () => {
   return (
@@ -20,7 +21,7 @@ const ServicesPage = () => {
       </div>
       <ServicesSection />
       <CtaSection />
-      {/* Footer goes here */}
+      <SimpleFooter />
     </div>
   );
 };

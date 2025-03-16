@@ -1,6 +1,5 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
-import Navbar from "./Navbar";
 import StatBox from "./StatBox";
 import SocialButton from "./SocialButton";
 
@@ -50,8 +49,6 @@ const HeroSection = () => {
     <div className="bg-[#0c0e0c] text-white font-sans antialiased min-h-screen">
       <div className="graffiti-bg min-h-screen relative">
         <div className="gradient-overlay min-h-screen">
-          <Navbar />
-
           <motion.main 
             className="container mx-auto px-6 pt-16 pb-16 flex flex-col items-center justify-center text-center relative min-h-[80vh]"
             initial="hidden"
@@ -136,7 +133,7 @@ const HeroSection = () => {
               variants={fadeInUp}
             >
               <motion.a 
-                href="#contact" 
+                href="/contact" 
                 className="bg-[#00ff4c] text-[#0c0e0c] px-8 py-3 rounded-full font-medium shadow-lg shadow-[#00ff4c]/20"
                 whileHover={{ 
                   scale: 1.05,
@@ -148,7 +145,7 @@ const HeroSection = () => {
               </motion.a>
               
               <motion.a 
-                href="#services" 
+                href="/services" 
                 className="border border-[#00ff4c] text-white px-8 py-3 rounded-full font-medium"
                 whileHover={{ 
                   scale: 1.05,
