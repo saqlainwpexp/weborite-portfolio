@@ -16,6 +16,7 @@ import ServicesPage from "@/pages/Services";
 import PortfolioPage from "@/pages/Portfolio";
 import AboutPage from "@/pages/About";
 import ContactPage from "@/pages/Contact";
+import BlogPage from "@/pages/Blog";
 
 function HomePage() {
   return (
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/about" component={AboutPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/blog" component={BlogPage} />
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
