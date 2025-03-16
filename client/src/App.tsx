@@ -43,6 +43,7 @@ function Router() {
       <Route path="/about" component={AboutPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/blog" component={BlogPage} />
+      <Route path="/blog/create" component={CreateBlog} />
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
