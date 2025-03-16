@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import ProjectDialog from "./ProjectDialog";
 
 const PortfolioSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProject, setSelectedProject] = useState(null);
   const containerRef = useRef(null);
-  
+
   const categories = [
     { id: "all", name: "All Work" },
     { id: "web", name: "Web Design" },
@@ -13,7 +14,7 @@ const PortfolioSection = () => {
     { id: "social", name: "Social Media" },
     { id: "content", name: "Content" }
   ];
-  
+
   const projects = [
     {
       id: 1,
@@ -58,39 +59,39 @@ const PortfolioSection = () => {
       stats: "First page ranking for 25 keywords"
     }
   ];
-  
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeCategory);
-  
+
+  const filteredProjects = activeCategory === "all"
+    ? projects
+    : projects.filter((project) => project.category === activeCategory);
+
   return (
     <section id="portfolio" className="py-24 bg-[#0c0e0c] relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="absolute top-20 left-[5%] w-80 h-80 rounded-full bg-gradient-to-r from-[#00ff4c]/3 to-transparent blur-3xl"
-          animate={{ 
+          animate={{
             scale: [1, 1.2, 1],
             opacity: [0.07, 0.12, 0.07],
             rotate: [0, 90, 180, 270, 360],
           }}
-          transition={{ 
-            duration: 25, 
+          transition={{
+            duration: 25,
             repeat: Infinity,
-            ease: "linear" 
+            ease: "linear"
           }}
         />
       </div>
 
       <div className="container mx-auto px-6 relative z-10" ref={containerRef}>
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.7 }}
         >
-          <motion.span 
+          <motion.span
             className="text-[#00ff4c] text-sm uppercase tracking-wider font-medium block mb-2"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -99,7 +100,7 @@ const PortfolioSection = () => {
           >
             Our Work
           </motion.span>
-          <motion.h2 
+          <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +109,7 @@ const PortfolioSection = () => {
           >
             Featured <span className="text-[#00ff4c]">Projects</span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-gray-400 max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -117,9 +118,9 @@ const PortfolioSection = () => {
           >
             Explore our portfolio of successful digital transformations across various industries
           </motion.p>
-          
+
           {/* Category Filters */}
-          <motion.div 
+          <motion.div
             className="flex flex-wrap justify-center gap-4 mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -130,14 +131,14 @@ const PortfolioSection = () => {
               <motion.button
                 key={category.id}
                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeCategory === category.id 
-                    ? "bg-[#00ff4c] text-[#0c0e0c]" 
+                  activeCategory === category.id
+                    ? "bg-[#00ff4c] text-[#0c0e0c]"
                     : "bg-[#181a18] text-white hover:bg-[#00ff4c]/10 hover:border-[#00ff4c]/30"
-                } border ${
-                  activeCategory === category.id 
-                    ? "border-[#00ff4c]" 
+                  } border ${
+                  activeCategory === category.id
+                    ? "border-[#00ff4c]"
                     : "border-[#2c2e2c]"
-                }`}
+                  }`}
                 onClick={() => setActiveCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -152,7 +153,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         {/* Projects Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           layout
           initial={{ opacity: 0 }}
@@ -168,7 +169,7 @@ const PortfolioSection = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.1 }}
-              transition={{ 
+              transition={{
                 delay: index * 0.1,
                 duration: 0.5,
                 layout: { duration: 0.4 }
@@ -177,39 +178,39 @@ const PortfolioSection = () => {
             >
               {/* Project Image */}
               <div className="relative h-[250px] overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
+                <img
+                  src={project.image}
+                  alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
+
                 {/* Overlay */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-[#0c0e0c] to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-70"
                   initial={{ opacity: 0.5 }}
                   whileHover={{ opacity: 0.7 }}
                 />
-                
+
                 {/* Border Animation */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 border-2 border-[#00ff4c]/0 rounded-lg"
                   whileHover={{ borderColor: "rgba(0, 255, 76, 0.5)" }}
                   transition={{ duration: 0.3 }}
                 />
-                
+
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 p-6 w-full">
-                  <motion.span 
+                  <motion.span
                     className="uppercase text-[#00ff4c] text-xs tracking-wider mb-2 block font-medium"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
                     transition={{ delay: 0.1 + index * 0.1, duration: 0.3 }}
                   >
-                    {categories.find(cat => cat.id === project.category)?.name}
+                    {categories.find((cat) => cat.id === project.category)?.name}
                   </motion.span>
-                  
-                  <motion.h3 
+
+                  <motion.h3
                     className="text-white text-xl font-semibold mb-2 group-hover:text-[#00ff4c] transition-colors duration-300"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -218,8 +219,8 @@ const PortfolioSection = () => {
                   >
                     {project.title}
                   </motion.h3>
-                  
-                  <motion.p 
+
+                  <motion.p
                     className="text-gray-400 text-sm mb-4"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -228,11 +229,11 @@ const PortfolioSection = () => {
                   >
                     {project.stats}
                   </motion.p>
-                  
+
                   <motion.div
                     className="transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
                   >
-                    <motion.button 
+                    <motion.button
                       onClick={() => setSelectedProject(project)}
                       className="text-[#00ff4c] text-sm font-medium flex items-center"
                       whileHover={{ x: 5 }}
@@ -249,16 +250,16 @@ const PortfolioSection = () => {
             </motion.div>
           ))}
         </motion.div>
-        
+
         {/* More Projects Button */}
-        <motion.div 
+        <motion.div
           className="mt-16 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <motion.button 
+          <motion.button
             onClick={() => window.location.href = '/portfolio'}
             className="bg-[#181a18] border border-[#2c2e2c] text-white px-8 py-3 rounded-full inline-flex items-center font-medium hover:bg-[#00ff4c]/10 hover:border-[#00ff4c]/30 transition-all duration-300"
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0, 255, 76, 0.2)" }}
@@ -271,26 +272,6 @@ const PortfolioSection = () => {
           </motion.button>
         </motion.div>
       </div>
-    </section>
-  );
-};
-
-{selectedProject && (
-        <ProjectDialog
-          isOpen={!!selectedProject}
-          onClose={() => setSelectedProject(null)}
-          project={{
-            title: selectedProject.title,
-            overview: selectedProject.description || "Digital ID Verification Platform",
-            stats: {
-              raised: "2M+",
-              growth: "72%"
-            },
-            image: selectedProject.image,
-            websiteUrl: selectedProject.url || "#"
-          }}
-        />
-      )}
     </section>
   );
 };
