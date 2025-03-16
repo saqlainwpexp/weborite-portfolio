@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,8 +24,8 @@ const CreateBlog = () => {
   const { toast } = useToast();
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
-  
-  const { register, handleSubmit, formState: { errors } } = useForm<BlogFormValues>({
+
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<BlogFormValues>({
     resolver: zodResolver(blogSchema)
   });
 
@@ -37,9 +36,9 @@ const CreateBlog = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
-      
+
       if (!response.ok) throw new Error("Failed to create blog post");
-      
+
       toast({
         title: "Success",
         description: "Blog post created successfully"
@@ -54,22 +53,28 @@ const CreateBlog = () => {
   };
 
   const createCategory = async () => {
+    if (!newCategory) return;
     try {
-      const response = await fetch("/api/categories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newCategory })
+      const response = await fetch('/api/categories', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: newCategory }),
       });
-      
-      if (!response.ok) throw new Error("Failed to create category");
-      
-      const category = await response.json();
-      setCategories([...categories, category]);
-      setNewCategory("");
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create category');
+      }
+
+      setCategories([...categories, data]);
+      setNewCategory('');
+      setValue('categoryId', data.id);
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to create category",
+        description: error.message,
         variant: "destructive"
       });
     }
@@ -80,7 +85,7 @@ const CreateBlog = () => {
       <Navbar />
       <div className="container mx-auto px-6 py-16">
         <h1 className="text-4xl font-bold mb-8">Create Blog Post</h1>
-        
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label className="block mb-2">Title</label>
@@ -95,7 +100,7 @@ const CreateBlog = () => {
             <label className="block mb-2">Featured Image</label>
             <input
               type="file"
-              accept="image/*"
+              accept="image/*,.webp"
               onChange={async (e) => {
                 const file = e.target.files?.[0];
                 if (file) {
@@ -180,7 +185,7 @@ const CreateBlog = () => {
                   <option key={cat.id} value={cat.id}>{cat.name}</option>
                 ))}
               </select>
-              
+
               <div className="flex gap-2">
                 <input
                   type="text"

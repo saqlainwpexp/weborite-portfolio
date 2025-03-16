@@ -43,6 +43,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/categories", async (req, res) => {
     try {
       const { name } = req.body;
+      if (!name) {
+        return res.status(400).json({ error: "Category name is required" });
+      }
       const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       const category = await storage.db.insert(categories).values({
         name,
@@ -50,7 +53,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }).returning();
       res.json(category[0]);
     } catch (error) {
-      res.status(500).json({ error: "Failed to create category" });
+      console.error('Category creation error:', error);
+      res.status(500).json({ error: error.message || "Failed to create category" });
     }
   });
 
