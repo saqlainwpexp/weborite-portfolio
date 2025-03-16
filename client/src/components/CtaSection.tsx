@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import useEmblaCarousel from 'embla-carousel-react';
+import { useCallback, useEffect, useState } from "react";
 
 const CtaSection = () => {
   // Company logos
@@ -69,8 +71,58 @@ const CtaSection = () => {
     }
   ];
 
+  // Embla carousel setup
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'center',
+    containScroll: 'keepSnaps'
+  });
+  
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+  }, [emblaApi, onSelect]);
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (!emblaApi) return;
+    
+    let animationId: ReturnType<typeof setTimeout>;
+    const autoScroll = () => {
+      if (emblaApi.canScrollNext()) {
+        emblaApi.scrollNext();
+      } else {
+        emblaApi.scrollTo(0);
+      }
+      animationId = setTimeout(autoScroll, 3000);
+    };
+    
+    animationId = setTimeout(autoScroll, 3000);
+    
+    return () => clearTimeout(animationId);
+  }, [emblaApi]);
+
   return (
-    <section className="py-20 bg-[#00A462]">
+    <section className="py-20 bg-[#00ff4c] relative">
       <div className="container mx-auto px-6">
         <motion.div 
           className="max-w-4xl mx-auto text-center mb-12"
@@ -80,7 +132,7 @@ const CtaSection = () => {
           transition={{ duration: 0.7 }}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-4 text-white"
+            className="text-4xl md:text-5xl font-bold mb-4 text-[#0c0e0c]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
@@ -99,8 +151,11 @@ const CtaSection = () => {
           >
             <motion.a 
               href="#contact"
-              className="inline-flex items-center bg-white text-[#00A462] rounded-full px-8 py-3 font-medium shadow-lg hover:bg-opacity-90 transition-all duration-300"
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" }}
+              className="inline-flex items-center bg-[#0c0e0c] text-white rounded-full px-8 py-3 font-medium shadow-lg hover:bg-[#1a1e1a] transition-all duration-300"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 25px rgba(0, 0, 0, 0.2)" 
+              }}
               whileTap={{ scale: 0.95 }}
             >
               Book a free discovery call
@@ -119,7 +174,7 @@ const CtaSection = () => {
           transition={{ delay: 0.5, duration: 0.7 }}
         >
           <motion.p 
-            className="text-center text-white/80 text-sm mb-8"
+            className="text-center text-[#0c0e0c]/80 text-sm mb-8 font-medium"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: false }}
@@ -128,19 +183,55 @@ const CtaSection = () => {
             Trusted by enterprises worldwide
           </motion.p>
           
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {logos.map((logo, index) => (
-              <motion.div
-                key={logo.id}
-                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 0.8, y: 0 }}
-                viewport={{ once: false }}
-                transition={{ delay: 0.7 + index * 0.1, duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                {logo.svg}
-              </motion.div>
+          {/* Logo Carousel */}
+          <div className="relative max-w-5xl mx-auto">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex items-center">
+                {logos.map((logo, index) => (
+                  <motion.div
+                    key={logo.id}
+                    className="flex-[0_0_20%] min-w-0 flex justify-center mx-4 opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.8 }}
+                    viewport={{ once: false }}
+                    transition={{ delay: 0.7 + index * 0.1, duration: 0.5 }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {logo.svg}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Carousel navigation buttons */}
+            <button 
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#0c0e0c]/10 hover:bg-[#0c0e0c]/20 p-2 rounded-full -ml-4 hidden md:block"
+              onClick={scrollPrev}
+              disabled={!prevBtnEnabled}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 19L8 12L15 5" stroke="#0c0e0c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <button 
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#0c0e0c]/10 hover:bg-[#0c0e0c]/20 p-2 rounded-full -mr-4 hidden md:block"
+              onClick={scrollNext}
+              disabled={!nextBtnEnabled}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 5L16 12L9 19" stroke="#0c0e0c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          {/* Pagination dots */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {[...Array(Math.ceil(logos.length / 3))].map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full bg-[#0c0e0c]/20 hover:bg-[#0c0e0c]/40 transition-all duration-300`}
+                onClick={() => emblaApi?.scrollTo(index * 3)}
+              />
             ))}
           </div>
         </motion.div>
@@ -149,7 +240,7 @@ const CtaSection = () => {
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         <div className="w-full h-full" style={{ 
-          backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px)',
           backgroundSize: '20px 20px' 
         }}></div>
       </div>
