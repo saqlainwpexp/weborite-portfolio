@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { sql } from "drizzle-orm";
 import { storage } from "./storage";
+import { categories, blogPosts } from "../shared/schema";
 import multer from "multer";
 import path from "path";
 

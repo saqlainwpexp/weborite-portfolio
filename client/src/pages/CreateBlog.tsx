@@ -177,7 +177,11 @@ const CreateBlog = () => {
             <label className="block mb-2">Category</label>
             <div className="flex gap-4">
               <select
-                {...register("categoryId", { valueAsNumber: true })}
+                {...register("categoryId", { 
+  required: "Please select a category",
+  valueAsNumber: true,
+  validate: value => !isNaN(value) || "Please select a valid category"
+})}
                 className="w-full p-2 bg-[#1a1a1a] rounded"
               >
                 <option value="">Select category</option>
