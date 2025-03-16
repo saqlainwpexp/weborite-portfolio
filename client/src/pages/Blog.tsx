@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import SimpleFooter from "@/components/SimpleFooter";
 import { motion } from "framer-motion";
 
-import { Link } from "wouter"; //Added Link import as per changes
+import { Link } from "@/components/ui/link"; //Added Link import as per changes
 
 const BlogPage = () => {
   const blogPosts = [

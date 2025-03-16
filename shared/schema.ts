@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, sql } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -33,7 +33,7 @@ export const blogPosts = pgTable("blog_posts", {
   categoryId: integer("category_id").references(() => categories.id),
   authorId: integer("author_id").references(() => users.id),
   published: boolean("published").default(false),
-  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const insertCategorySchema = createInsertSchema(categories);
