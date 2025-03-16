@@ -1,6 +1,11 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import { sql } from "drizzle-orm";
 import { storage } from "./storage";
+import multer from "multer";
+import path from "path";
+
+const upload = multer({ dest: 'uploads/' });
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // put application routes here
@@ -46,6 +51,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(category[0]);
     } catch (error) {
       res.status(500).json({ error: "Failed to create category" });
+    }
+  });
+
+  app.post("/api/upload", upload.single('image'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+      // Store file in uploads directory and return URL
+      const fileName = `${Date.now()}-${path.basename(req.file.originalname)}`;
+      const filePath = path.join('uploads', fileName);
+      res.json({ url: `/uploads/${fileName}` });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to upload file" });
     }
   });
 

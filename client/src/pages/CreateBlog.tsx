@@ -92,9 +92,31 @@ const CreateBlog = () => {
           </div>
 
           <div>
-            <label className="block mb-2">Featured Image URL</label>
+            <label className="block mb-2">Featured Image</label>
             <input
-              {...register("featuredImage")}
+              type="file"
+              accept="image/*"
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const formData = new FormData();
+                  formData.append('image', file);
+                  try {
+                    const response = await fetch('/api/upload', {
+                      method: 'POST',
+                      body: formData
+                    });
+                    const { url } = await response.json();
+                    setValue('featuredImage', url);
+                  } catch (error) {
+                    toast({
+                      title: "Error",
+                      description: "Failed to upload image",
+                      variant: "destructive"
+                    });
+                  }
+                }
+              }}
               className="w-full p-2 bg-[#1a1a1a] rounded"
             />
           </div>
