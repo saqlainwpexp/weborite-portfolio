@@ -19,6 +19,7 @@ import ContactPage from "@/pages/Contact";
 function HomePage() {
   return (
     <div className="bg-[#0c0e0c] text-white font-sans antialiased">
+      <Navbar />
       <HeroSection />
       <ServicesSection />
       <PortfolioSection />
@@ -32,8 +33,12 @@ function HomePage() {
 function Router() {
   return (
     <Switch>
-      {/* Add pages below */}
+      {/* Main routes */}
       <Route path="/" component={HomePage} />
+      <Route path="/services" component={ServicesPage} />
+      <Route path="/portfolio" component={PortfolioPage} />
+      <Route path="/about" component={AboutPage} />
+      <Route path="/contact" component={ContactPage} />
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>

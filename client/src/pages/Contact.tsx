@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
 
 const ContactPage = () => {
   return (
@@ -19,7 +18,7 @@ const ContactPage = () => {
         </div>
       </div>
       <ContactSection />
-      {typeof Footer !== 'undefined' && <Footer />}
+      {/* Footer goes here */}
     </div>
   );
 };

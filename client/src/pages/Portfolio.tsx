@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import PortfolioSection from "@/components/PortfolioSection";
-import Footer from "@/components/Footer";
 import CtaSection from "@/components/CtaSection";
 
 const PortfolioPage = () => {
@@ -21,7 +20,7 @@ const PortfolioPage = () => {
       </div>
       <PortfolioSection />
       <CtaSection />
-      {typeof Footer !== 'undefined' && <Footer />}
+      {/* Footer goes here */}
     </div>
   );
 };
