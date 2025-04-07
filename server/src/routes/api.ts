@@ -1,13 +1,8 @@
 import express from 'express';
-import { Pool } from 'pg';
 import { verifyToken } from '../middleware/auth';
 import { pool } from '../db/db';
 
 const router = express.Router();
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-});
 
 // Team Members Routes
 router.get('/team', async (req, res) => {
