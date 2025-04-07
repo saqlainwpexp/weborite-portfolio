@@ -1,3 +1,4 @@
+import * as React from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import StatBox from "./StatBox";
@@ -133,7 +134,7 @@ const HeroSection = () => {
               variants={fadeInUp}
             >
               <motion.a 
-                href="/contact" 
+                href="/quote" 
                 className="bg-[#00ff4c] text-[#0c0e0c] px-8 py-3 rounded-full font-medium shadow-lg shadow-[#00ff4c]/20"
                 whileHover={{ 
                   scale: 1.05,
@@ -141,7 +142,7 @@ const HeroSection = () => {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Get Started
+                Get a Quote
               </motion.a>
               
               <motion.a 
@@ -195,31 +196,28 @@ const HeroSection = () => {
             </motion.div>
             
             {/* Mouse Scroll Indicator */}
-            <motion.div 
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 1 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-8 z-10"
             >
-              <motion.div 
-                className="w-8 h-12 border-2 border-[#00ff4c] rounded-full flex justify-center pt-2 mb-2"
-                initial={{ opacity: 0.5 }}
-                animate={{ opacity: [0.2, 0.8, 0.2] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <motion.div 
-                  className="w-1 h-2 bg-[#00ff4c] rounded-full"
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </motion.div>
-              <motion.p 
-                className="text-[#00ff4c] text-xs font-light"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                Scroll Down
-              </motion.p>
+              <div className="flex flex-col items-center">
+                <div className="w-6 h-10 border-2 border-[#00ff4c] rounded-full flex justify-center items-start p-1">
+                  <motion.div
+                    animate={{
+                      y: [0, 8, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                    }}
+                    className="w-1 h-1 bg-[#00ff4c] rounded-full"
+                  />
+                </div>
+                <span className="text-[#00ff4c] text-sm mt-2">Scroll to explore</span>
+              </div>
             </motion.div>
           </motion.main>
         </div>

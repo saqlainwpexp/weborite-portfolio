@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,10 +24,32 @@ const CreateBlog = () => {
   const { toast } = useToast();
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<BlogFormValues>({
     resolver: zodResolver(blogSchema)
   });
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/categories');
+        if (!response.ok) {
+          throw new Error('Failed to fetch categories');
+        }
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to load categories",
+          variant: "destructive"
+        });
+      }
+    };
+
+    fetchCategories();
+  }, [toast]);
 
   const onSubmit = async (data: BlogFormValues) => {
     try {
@@ -54,6 +76,8 @@ const CreateBlog = () => {
 
   const createCategory = async () => {
     if (!newCategory) return;
+    
+    setIsLoading(true);
     try {
       const response = await fetch('/api/categories', {
         method: 'POST',
@@ -62,6 +86,7 @@ const CreateBlog = () => {
         },
         body: JSON.stringify({ name: newCategory }),
       });
+      
       const data = await response.json();
 
       if (!response.ok) {
@@ -71,12 +96,19 @@ const CreateBlog = () => {
       setCategories([...categories, data]);
       setNewCategory('');
       setValue('categoryId', data.id);
-    } catch (error) {
+      
+      toast({
+        title: "Success",
+        description: "Category created successfully"
+      });
+    } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: error.message || "Failed to create category",
         variant: "destructive"
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -178,10 +210,10 @@ const CreateBlog = () => {
             <div className="flex gap-4">
               <select
                 {...register("categoryId", { 
-  required: "Please select a category",
-  valueAsNumber: true,
-  validate: value => !isNaN(value) || "Please select a valid category"
-})}
+                  required: "Please select a category",
+                  valueAsNumber: true,
+                  validate: value => !isNaN(value) || "Please select a valid category"
+                })}
                 className="w-full p-2 bg-[#1a1a1a] rounded"
               >
                 <option value="">Select category</option>
@@ -201,9 +233,10 @@ const CreateBlog = () => {
                 <button
                   type="button"
                   onClick={createCategory}
-                  className="px-4 py-2 bg-[#00ff4c] text-black rounded"
+                  disabled={isLoading || !newCategory.trim()}
+                  className={`px-4 py-2 ${isLoading || !newCategory.trim() ? 'bg-gray-600' : 'bg-[#00ff4c]'} text-black rounded`}
                 >
-                  Add
+                  {isLoading ? 'Adding...' : 'Add'}
                 </button>
               </div>
             </div>

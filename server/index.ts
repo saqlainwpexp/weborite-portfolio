@@ -1,8 +1,44 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import type { CorsOptions } from 'cors';
+import cors from 'cors';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load environment variables from the root directory
+const envPath = path.resolve(process.cwd(), '.env');
+console.log('Loading .env from:', envPath);
+dotenv.config({ path: envPath });
+
+// Log environment variables (without sensitive data)
+console.log('Environment Variables:', {
+  DB_USER: process.env.DB_USER,
+  DB_HOST: process.env.DB_HOST,
+  DB_NAME: process.env.DB_NAME,
+  DB_PORT: process.env.DB_PORT,
+  NODE_ENV: process.env.NODE_ENV,
+  FRONTEND_URL: process.env.FRONTEND_URL
+});
 
 const app = express();
+
+// CORS configuration
+const corsOptions: CorsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL 
+    : 'http://localhost:5173',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

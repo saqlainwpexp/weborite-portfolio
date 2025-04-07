@@ -18,6 +18,9 @@ import AboutPage from "@/pages/About";
 import ContactPage from "@/pages/Contact";
 import BlogPage from "@/pages/Blog";
 import CreateBlog from "@/pages/CreateBlog";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import QuotePage from "@/pages/QuotePage";
+import Admin from "@/pages/Admin";
 
 function HomePage() {
   return (
@@ -26,6 +29,7 @@ function HomePage() {
       <HeroSection />
       <ServicesSection />
       <PortfolioSection />
+      <TestimonialsSection />
       <CtaSection />
       <AboutSection />
       <ContactSection />
@@ -45,6 +49,9 @@ function Router() {
       <Route path="/contact" component={ContactPage} />
       <Route path="/blog" component={BlogPage} />
       <Route path="/blog/create" component={CreateBlog} />
+      <Route path="/quote" component={QuotePage} />
+      {/* Admin route */}
+      <Route path="/admin" component={Admin} />
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
