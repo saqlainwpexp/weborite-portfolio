@@ -3,28 +3,18 @@ import { useRef, useState } from "react";
 import ProjectDialog from "./ProjectDialog";
 
 interface Project {
+  id: number;
   title: string;
-  overview: string;
-  stats: {
-    raised: string;
-    growth: string;
-  };
+  category: string;
   image: string;
+  stats: string;
+  overview: string;
   websiteUrl: string;
 }
 
 const PortfolioSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedProject, setSelectedProject] = useState<{
-    title: string;
-    overview: string;
-    stats: {
-      raised: string;
-      growth: string;
-    };
-    image: string;
-    websiteUrl: string;
-  } | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const containerRef = useRef(null);
 
   const categories = [
@@ -254,7 +244,15 @@ const PortfolioSection = () => {
                     className="transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
                   >
                     <motion.button
-                      onClick={() => setSelectedProject(project)}
+                      onClick={() => setSelectedProject({
+                        id: project.id,
+                        title: project.title,
+                        category: project.category,
+                        image: project.image,
+                        stats: project.stats,
+                        overview: project.overview || '',
+                        websiteUrl: project.websiteUrl || ''
+                      })}
                       className="text-[#00ff4c] text-sm font-medium flex items-center"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}

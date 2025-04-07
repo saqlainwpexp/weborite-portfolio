@@ -20,11 +20,17 @@ const blogSchema = z.object({
 
 type BlogFormValues = z.infer<typeof blogSchema>;
 
+interface Tag {
+  id: string;
+  name: string;
+}
+
 const CreateBlog = () => {
   const { toast } = useToast();
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<BlogFormValues>({
     resolver: zodResolver(blogSchema)
@@ -110,6 +116,14 @@ const CreateBlog = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleTagSelect = (tag: Tag) => {
+    setSelectedTags(prev => [...prev, tag]);
+  };
+
+  const handleTagRemove = (tagId: string) => {
+    setSelectedTags(prev => prev.filter(tag => tag.id !== tagId));
   };
 
   return (
