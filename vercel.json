@@ -6,6 +6,16 @@
   "installCommand": "cd client && npm install",
   "regions": ["iad1"],
   "env": {
-    "VITE_API_URL": "https://heroharbor-server.vercel.app"
-  }
+    "VITE_API_URL": "https://your-backend-url.vercel.app"
+  },
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist",
+        "buildCommand": "npm run build"
+      }
+    }
+  ]
 } 
